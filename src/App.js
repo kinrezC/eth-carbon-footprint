@@ -34,36 +34,49 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
   textfield: {
-    width: 530,
+    width: 430,
     marginTop: 22,
     '& .MuiOutlinedInput-root': {
       color: 'white',
       '& fieldset': {
-        borderColor: 'white',
+        borderColor: '#393939',
       },
       '&:hover fieldset': {
         borderColor: 'white',
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#9e1aeb',
+        borderColor: 'white',
       },
     },
     '& label.Mui-focused': {
-      color: '#e8ba23',
+      color: 'white',
     },
     '& .MuiInputLabel-root': {
-      color: 'white',
+      color: '#696969',
     },
     '& .MuiFormHelperText-root': {
       color: 'white',
-      fontWeight: 'bold',
+      fontWeight: 'regular',
     },
   },
   form: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginTop: 75,
+  },
+  formContainer: {
+    marginTop: 35,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    borderRadius: 6,
+    padding: 50,
+  },
+  headerContainer: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    color: 'white',
+    fontWeight: 300,
+    paddingBottom: 20,
   },
   images: {
     height: 150,
@@ -80,7 +93,7 @@ const useStyles = makeStyles({
   },
   submitButton: {
     marginTop: 25,
-    width: 530,
+    width: 430,
     height: 50,
     backgroundColor: '#bb01b8',
     color: 'white',
@@ -98,7 +111,7 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
   },
   btnText: {
-    fontWeight: 'bold',
+    fontWeight: 'regular',
     letterSpacing: 1.15,
   },
   infoIcon: {
@@ -223,42 +236,75 @@ const App = () => {
             <img src={Footprint} className={classes.images} />
           </motion.div>
         </div>
-        <form autoComplete="off" className={classes.form}>
-          <TextField
-            id="ethAddress"
-            name="ethAddress"
-            label="Ethereum Address"
-            className={classes.textfield}
-            value={values.address}
-            onChange={handleChange('ethAddress')}
-            margin="normal"
-            variant="outlined"
-            disabled={disabled}
-          />
-          <TextField
-            id="lowerBound"
-            name="lowerBound"
-            label="Lower Bound Block Number"
-            className={classes.textfield}
-            value={values.address}
-            onChange={handleChange('lowerBound')}
-            margin="normal"
-            variant="outlined"
-            disabled={disabled}
-          />
-          <TextField
-            id="upperBound"
-            name="upperBound"
-            label="Upper Bound Block Number"
-            className={classes.textfield}
-            value={values.address}
-            onChange={handleChange('upperBound')}
-            margin="normal"
-            variant="outlined"
-            helperText={`Current Block: ${blockNumber}`}
-            disabled={disabled}
-          />
-        </form>
+        <div className={classes.formContainer}>
+          <div className={classes.headerContainer}>
+            <Typography variant="h4" className={classes.title}>
+              ETH · Carbon · Footprint
+            </Typography>
+          </div>
+          <form autocomplete="off" className={classes.form}>
+            <TextField
+              id="ethAddress"
+              name="ethAddress"
+              label="Ethereum Address"
+              className={classes.textfield}
+              value={values.address}
+              onChange={handleChange('ethAddress')}
+              margin="normal"
+              variant="outlined"
+              disabled={disabled}
+            />
+            <TextField
+              id="lowerBound"
+              name="lowerBound"
+              label="Lower Bound Block Number"
+              className={classes.textfield}
+              value={values.address}
+              onChange={handleChange('lowerBound')}
+              margin="normal"
+              variant="outlined"
+              disabled={disabled}
+            />
+            <TextField
+              id="upperBound"
+              name="upperBound"
+              label="Upper Bound Block Number"
+              className={classes.textfield}
+              value={values.address}
+              onChange={handleChange('upperBound')}
+              margin="normal"
+              variant="outlined"
+              helperText={`Current Block: ${blockNumber}`}
+              disabled={disabled}
+            />
+            {disableSubmit ? (
+              <motion.div
+                className={classes.loader}
+                animate={{
+                  scale: [1, 2.5, 2, 1, 1],
+                  rotate: [0, 0, 270, 270, 0],
+                  borderRadius: ['20%', '20%', '50%', '50%', '20%'],
+                }}
+                transition={{
+                  duration: 2,
+                  ease: 'easeInOut',
+                  times: [0, 0.2, 0.5, 0.8, 1],
+                  loop: Infinity,
+                  repeatDelay: 1,
+                }}
+              />
+            ) : (
+              <Button
+                className={classes.submitButton}
+                onClick={() => handleSubmit()}
+              >
+                <Typography variant="subtitle1" className={classes.btnText}>
+                  View Results
+                </Typography>
+              </Button>
+            )}
+          </form>
+        </div>
         <div className={classes.errorWrapper}>
           {invalidInput && (
             <Typography variant="h6" className={classes.errorMsg}>
@@ -266,32 +312,6 @@ const App = () => {
             </Typography>
           )}
         </div>
-        {disableSubmit ? (
-          <motion.div
-            className={classes.loader}
-            animate={{
-              scale: [1, 2.5, 2, 1, 1],
-              rotate: [0, 0, 270, 270, 0],
-              borderRadius: ['20%', '20%', '50%', '50%', '20%'],
-            }}
-            transition={{
-              duration: 2,
-              ease: 'easeInOut',
-              times: [0, 0.2, 0.5, 0.8, 1],
-              loop: Infinity,
-              repeatDelay: 1,
-            }}
-          />
-        ) : (
-          <Button
-            className={classes.submitButton}
-            onClick={() => handleSubmit()}
-          >
-            <Typography variant="subtitle1" className={classes.btnText}>
-              View Results
-            </Typography>
-          </Button>
-        )}
         {gasUsed && (
           <motion.div className={classes.resContainer}>
             <Typography variant="subtitle2" className={classes.resText}>

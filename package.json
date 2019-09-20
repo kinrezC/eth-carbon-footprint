@@ -10,7 +10,8 @@
     "framer-motion": "^1.6.7",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-scripts": "3.1.2"
+    "react-scripts": "3.1.2",
+    "web3": "^1.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
