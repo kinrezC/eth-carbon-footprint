@@ -37,6 +37,7 @@ const useStyles = makeStyles({
     width: 430,
     marginTop: 22,
     '& .MuiOutlinedInput-root': {
+      fontFamily: 'Nunito Sans',
       color: 'white',
       '& fieldset': {
         borderColor: '#393939',
@@ -50,14 +51,29 @@ const useStyles = makeStyles({
     },
     '& label.Mui-focused': {
       color: 'white',
+      fontFamily: 'Nunito Sans',
     },
     '& .MuiInputLabel-root': {
-      color: '#696969',
+      fontFamily: 'Nunito Sans',
+      color: 'white',
+    },
+    '& .MuiInputLabel-outlined': {
+      color: 'white',
+      fontFamily: 'Nunito Sans',
     },
     '& .MuiFormHelperText-root': {
       color: 'white',
-      fontWeight: 'regular',
+      fontFamily: 'Nunito Sans',
+      fontWeight: 'bold',
     },
+  },
+  headerContainer: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    color: 'white',
+    fontWeight: 300,
+    paddingBottom: 20,
   },
   form: {
     display: 'flex',
@@ -69,14 +85,6 @@ const useStyles = makeStyles({
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
     borderRadius: 6,
     padding: 50,
-  },
-  headerContainer: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    color: 'white',
-    fontWeight: 300,
-    paddingBottom: 20,
   },
   images: {
     height: 150,
@@ -90,6 +98,9 @@ const useStyles = makeStyles({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 65,
+  },
+  title: {
+    fontFamily: 'Nunito Sans',
   },
   submitButton: {
     marginTop: 25,
@@ -107,11 +118,13 @@ const useStyles = makeStyles({
     position: 'fixed',
   },
   errorMsg: {
+    fontFamily: 'Nunito Sanas',
     color: 'red',
     fontWeight: 'bold',
   },
   btnText: {
-    fontWeight: 'regular',
+    fontWeight: 'bold',
+    fontFamily: 'Nunito Sans',
     letterSpacing: 1.15,
   },
   infoIcon: {
@@ -133,6 +146,7 @@ const useStyles = makeStyles({
   },
   resText: {
     fontWeight: 'bold',
+    fontFamily: 'Nunito Sans',
     color: 'white',
   },
 });
