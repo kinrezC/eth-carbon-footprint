@@ -73,7 +73,8 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     color: 'white',
     fontWeight: 300,
-    paddingBottom: 20,
+    marginBottom: 20,
+    marginTop: 50,
   },
   form: {
     display: 'flex',
@@ -84,7 +85,7 @@ const useStyles = makeStyles({
     marginTop: 35,
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
     borderRadius: 6,
-    padding: 50,
+    width: 530,
   },
   images: {
     height: 150,
@@ -103,7 +104,6 @@ const useStyles = makeStyles({
     fontFamily: 'Nunito Sans',
   },
   submitButton: {
-    marginTop: 25,
     width: 430,
     height: 50,
     backgroundColor: '#bb01b8',
@@ -113,14 +113,20 @@ const useStyles = makeStyles({
       backgroundColor: '#bb01b8',
     },
   },
+  submitContainer: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: 50,
+    marginTop: 25,
+  },
   errorWrapper: {
     marginTop: 20,
     position: 'fixed',
   },
   errorMsg: {
-    fontFamily: 'Nunito Sanas',
+    fontFamily: 'Nunito Sans',
     color: 'red',
-    fontWeight: 'bold',
   },
   btnText: {
     fontWeight: 'bold',
@@ -291,23 +297,25 @@ const App = () => {
               helperText={`Current Block: ${blockNumber}`}
               disabled={disabled}
             />
-            {disableSubmit ? (
-              <motion.div
-                className={classes.loader}
-                animate={{
-                  scale: [1, 2.5, 2, 1, 1],
-                  rotate: [0, 0, 270, 270, 0],
-                  borderRadius: ['20%', '20%', '50%', '50%', '20%'],
-                }}
-                transition={{
-                  duration: 2,
-                  ease: 'easeInOut',
-                  times: [0, 0.2, 0.5, 0.8, 1],
-                  loop: Infinity,
-                  repeatDelay: 1,
-                }}
-              />
-            ) : (
+          </form>
+          {disableSubmit ? (
+            <motion.div
+              className={classes.loader}
+              animate={{
+                scale: [1, 2.5, 2, 1, 1],
+                rotate: [0, 0, 270, 270, 0],
+                borderRadius: ['20%', '20%', '50%', '50%', '20%'],
+              }}
+              transition={{
+                duration: 2,
+                ease: 'easeInOut',
+                times: [0, 0.2, 0.5, 0.8, 1],
+                loop: Infinity,
+                repeatDelay: 1,
+              }}
+            />
+          ) : (
+            <div className={classes.submitContainer}>
               <Button
                 className={classes.submitButton}
                 onClick={() => handleSubmit()}
@@ -316,8 +324,8 @@ const App = () => {
                   View Results
                 </Typography>
               </Button>
-            )}
-          </form>
+            </div>
+          )}
         </div>
         <div className={classes.errorWrapper}>
           {invalidInput && (
