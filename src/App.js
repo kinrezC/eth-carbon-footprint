@@ -8,7 +8,6 @@ import EthLogo from './assets/Eth.png';
 import Footprint from './assets/foot.png';
 
 // TODO: INITIALIZE WEB3 AND UPDATE WITH CURRENT BLOCK
-
 const web3 = new Web3();
 
 const useStyles = makeStyles({
@@ -28,7 +27,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
   textfield: {
-    width: 500,
+    width: 530,
     marginTop: 22,
     '& .MuiOutlinedInput-root': {
       color: 'white',
@@ -50,6 +49,7 @@ const useStyles = makeStyles({
     },
     '& .MuiFormHelperText-root': {
       color: 'white',
+      fontWeight: 'bold',
     },
   },
   form: {
@@ -73,6 +73,8 @@ const useStyles = makeStyles({
   },
   submitButton: {
     marginTop: 25,
+    width: 530,
+    height: 50,
     backgroundColor: '#bb01b8',
     color: 'white',
     fontWeight: 'bold',
@@ -88,15 +90,35 @@ const useStyles = makeStyles({
     color: 'red',
     fontWeight: 'bold',
   },
+  btnText: {
+    fontWeight: 'bold',
+    letterSpacing: 1.15,
+  },
+  infoIcon: {
+    width: 20,
+    height: 20,
+    borderRadius: 8,
+    background: 'white',
+    marginTop: 150,
+  },
+  loader: {
+    height: 30,
+    width: 30,
+    borderRadius: 8,
+    backgroundColor: '#bb01b8',
+    marginTop: 25,
+  },
 });
 
-function App() {
+const App = () => {
   const controls = useAnimation();
   const classes = useStyles();
   const [disabled, setDisabled] = useState(false);
   const [disableSubmit, setDisableSubmit] = useState(false);
-  const [blockNumber, setBlockNumber] = useState(null);
+  const [blockNumber, setBlockNumber] = useState('');
   const [invalidInput, setInvalidInput] = useState(false);
+  const [gasUsed, setGasUsed] = useState('');
+  const [feesPaid, setFeesPaid] = useState('');
   const [values, setValues] = useState({
     ethAddress: '',
     lowerBound: '',
@@ -107,12 +129,14 @@ function App() {
     if (
       /^(0x)+[0-9a-fA-F]{40}$/i.test(values.ethAddress) &&
       Number(values.lowerBound) < Number(values.upperBound) &&
-      Number(values.lowerBound) > 0 &&
+      Number(values.lowerBound) >= 0 &&
       Number(values.upperBound) > 0 &&
-      Number(values.upperBound) > blockNumber &&
-      Number(values.lowerBound) > blockNumber
+      Number(values.upperBound) <= blockNumber &&
+      Number(values.lowerBound) < blockNumber
     ) {
       setDisableSubmit(true);
+      console.log(disableSubmit);
+      return;
     }
     setInvalidInput(true);
   };
@@ -199,21 +223,53 @@ function App() {
         <div className={classes.errorWrapper}>
           {invalidInput && (
             <Typography variant="h6" className={classes.errorMsg}>
-              Invalid Input!
+              Invalid Input
             </Typography>
           )}
         </div>
-        <Button
-          variant="contained"
-          className={classes.submitButton}
-          disabled={disableSubmit}
-          onClick={() => handleSubmit()}
-        >
-          See Your Gas Usage!
-        </Button>
+        {disableSubmit ? (
+          <motion.div
+            className={classes.loader}
+            animate={{
+              scale: [1, 2.5, 2, 1, 1],
+              rotate: [0, 0, 270, 270, 0],
+              borderRadius: ['20%', '20%', '50%', '50%', '20%'],
+            }}
+            transition={{
+              duration: 2,
+              ease: 'easeInOut',
+              times: [0, 0.2, 0.5, 0.8, 1],
+              loop: Infinity,
+              repeatDelay: 1,
+            }}
+          />
+        ) : (
+          <Button
+            className={classes.submitButton}
+            onClick={() => handleSubmit()}
+          >
+            <Typography variant="subtitle1" className={classes.btnText}>
+              View Results
+            </Typography>
+          </Button>
+        )}
+        {gasUsed && (
+          <motion.div className={classes.responseContainer}>
+            <Typography variant="subtitle1">
+              {`Gas Used: ${gasUsed}`}
+            </Typography>
+          </motion.div>
+        )}
+        {feesPaid && (
+          <motion.div className={classes.responseContainer}>
+            <Typography variant="subtitle2">
+              {`Fees Paid: ${feesPaid}`}
+            </Typography>
+          </motion.div>
+        )}
       </div>
     </div>
   );
-}
+};
 
 export default App;
