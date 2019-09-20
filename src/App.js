@@ -73,7 +73,7 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     color: 'white',
     fontWeight: 300,
-    marginBottom: 20,
+    marginBottom: 8,
     marginTop: 50,
   },
   form: {
@@ -117,7 +117,7 @@ const useStyles = makeStyles({
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    marginBottom: 50,
+    marginBottom: 40,
     marginTop: 25,
   },
   errorWrapper: {
