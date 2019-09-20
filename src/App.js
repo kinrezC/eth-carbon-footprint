@@ -74,7 +74,7 @@ const useStyles = makeStyles({
     color: 'white',
     fontWeight: 300,
     marginBottom: 8,
-    marginTop: 50,
+    marginTop: 40,
   },
   form: {
     display: 'flex',
@@ -229,7 +229,7 @@ const App = () => {
       y: [-12, 12, -12],
       initial: false,
       transition: {
-        delay: i * 0.3,
+        delay: i * 0.4,
         loop: Infinity,
         duration: 2.2,
         ease: 'easeInOut',
