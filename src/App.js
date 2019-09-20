@@ -7,6 +7,7 @@ import Carbon from './assets/carbon.png';
 import EthLogo from './assets/Eth.png';
 import Footprint from './assets/foot.png';
 
+
 // TODO: INITIALIZE WEB3 AND UPDATE WITH CURRENT BLOCK
 const web3 = new Web3(
   new Web3.providers.HttpProvider(
@@ -31,36 +32,49 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
   textfield: {
-    width: 530,
+    width: 430,
     marginTop: 22,
     '& .MuiOutlinedInput-root': {
       color: 'white',
       '& fieldset': {
-        borderColor: 'white',
+        borderColor: '#393939',
       },
       '&:hover fieldset': {
         borderColor: 'white',
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#9e1aeb',
+        borderColor: 'white',
       },
     },
     '& label.Mui-focused': {
-      color: '#e8ba23',
+      color: 'white',
     },
     '& .MuiInputLabel-root': {
-      color: 'white',
+      color: '#696969',
     },
     '& .MuiFormHelperText-root': {
       color: 'white',
-      fontWeight: 'bold',
+      fontWeight: 'regular',
     },
   },
   form: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginTop: 75,
+  },
+  formContainer: {
+    marginTop: 35,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    borderRadius: 6,
+    padding: 50,
+  },
+  headerContainer: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    color: 'white',
+    fontWeight: 300,
+    paddingBottom: 20,
   },
   images: {
     height: 150,
@@ -77,7 +91,7 @@ const useStyles = makeStyles({
   },
   submitButton: {
     marginTop: 25,
-    width: 530,
+    width: 430,
     height: 50,
     backgroundColor: '#bb01b8',
     color: 'white',
@@ -95,7 +109,7 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
   },
   btnText: {
-    fontWeight: 'bold',
+    fontWeight: 'regular',
     letterSpacing: 1.15,
   },
   infoIcon: {
@@ -188,6 +202,12 @@ const App = () => {
             <img src={Footprint} className={classes.images} />
           </motion.div>
         </div>
+        <div className={classes.formContainer}>
+          <div className={classes.headerContainer}>
+            <Typography variant='h4' className={classes.title}>
+              ETH · Carbon · Footprint
+            </Typography>
+        </div>
         <form autocomplete="off" className={classes.form}>
           <TextField
             id="ethAddress"
@@ -223,15 +243,7 @@ const App = () => {
             helperText={`Current Block: ${blockNumber}`}
             disabled={disabled}
           />
-        </form>
-        <div className={classes.errorWrapper}>
-          {invalidInput && (
-            <Typography variant="h6" className={classes.errorMsg}>
-              Invalid Input
-            </Typography>
-          )}
-        </div>
-        {disableSubmit ? (
+          {disableSubmit ? (
           <motion.div
             className={classes.loader}
             animate={{
@@ -257,6 +269,15 @@ const App = () => {
             </Typography>
           </Button>
         )}
+        </form>
+        </div>
+        <div className={classes.errorWrapper}>
+          {invalidInput && (
+            <Typography variant="h6" className={classes.errorMsg}>
+              Invalid Input
+            </Typography>
+          )}
+        </div>
         {gasUsed && (
           <motion.div className={classes.responseContainer}>
             <Typography variant="subtitle1">
