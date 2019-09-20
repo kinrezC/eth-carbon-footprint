@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Web3 from 'web3';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/styles';
 import { motion, useAnimation } from 'framer-motion';
 import { Typography, TextField, Button } from '@material-ui/core';
@@ -13,6 +14,8 @@ const web3 = new Web3(
     'https://terminal.co/networks/ethereum_main/3428b88273cdf858',
   ),
 );
+
+const NETWORK = 'ethereum_main';
 
 const useStyles = makeStyles({
   root: {
@@ -112,6 +115,13 @@ const useStyles = makeStyles({
     backgroundColor: '#bb01b8',
     marginTop: 25,
   },
+  resContainer: {
+    marginTop: 30,
+  },
+  resText: {
+    fontWeight: 'bold',
+    color: 'white',
+  },
 });
 
 const App = () => {
@@ -139,7 +149,7 @@ const App = () => {
       Number(values.lowerBound) < blockNumber
     ) {
       setDisableSubmit(true);
-      console.log(disableSubmit);
+      fetchData();
       return;
     }
     setInvalidInput(true);
@@ -149,7 +159,27 @@ const App = () => {
     setInvalidInput(false);
     setValues({ ...values, [name]: event.target.value });
   };
-  // TODO: SET BLOCK ON MOUNT
+
+  const fetchData = () => {
+    axios
+      .post(
+        'https://us-central1-terminal-prd.cloudfunctions.net/custom_api_fc5a3b6d7eb4-45a3-bf3f-fb4be68b7b83',
+        {
+          address: values.ethAddress,
+          lowerBound: values.lowerBound,
+          upperBound: values.upperBound,
+          network: NETWORK,
+        },
+        {
+          headers: {
+            'ApiKey': 'IYFLu2akdq6D4WhIqhZVVw==',
+            'ApiSecret': 'lnlZOjCeKJm2OOh5vQ2FxNwwRYm7PCt10XNEU/8Bkyw=',
+          },
+        },
+      )
+      .then(res => console.log(res));
+  };
+
   useEffect(() => {
     web3.eth.getBlockNumber().then(res => setBlockNumber(res));
   }, []);
@@ -174,6 +204,11 @@ const App = () => {
     }));
   }, [controls]);
 
+  useEffect(() => {
+    if (disableSubmit) {
+    }
+  });
+
   return (
     <div className={classes.root}>
       <div className={classes.appContainer}>
@@ -188,7 +223,7 @@ const App = () => {
             <img src={Footprint} className={classes.images} />
           </motion.div>
         </div>
-        <form autocomplete="off" className={classes.form}>
+        <form autoComplete="off" className={classes.form}>
           <TextField
             id="ethAddress"
             name="ethAddress"
@@ -258,15 +293,15 @@ const App = () => {
           </Button>
         )}
         {gasUsed && (
-          <motion.div className={classes.responseContainer}>
-            <Typography variant="subtitle1">
+          <motion.div className={classes.resContainer}>
+            <Typography variant="subtitle2" className={classes.resText}>
               {`Gas Used: ${gasUsed}`}
             </Typography>
           </motion.div>
         )}
         {feesPaid && (
-          <motion.div className={classes.responseContainer}>
-            <Typography variant="subtitle2">
+          <motion.div className={classes.resContainer}>
+            <Typography variant="subtitle2" className={classes.resText}>
               {`Fees Paid: ${feesPaid}`}
             </Typography>
           </motion.div>
