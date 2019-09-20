@@ -8,7 +8,11 @@ import EthLogo from './assets/Eth.png';
 import Footprint from './assets/foot.png';
 
 // TODO: INITIALIZE WEB3 AND UPDATE WITH CURRENT BLOCK
-const web3 = new Web3();
+const web3 = new Web3(
+  new Web3.providers.HttpProvider(
+    'https://terminal.co/networks/ethereum_main/3428b88273cdf858',
+  ),
+);
 
 const useStyles = makeStyles({
   root: {
