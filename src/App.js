@@ -57,7 +57,8 @@ const useStyles = makeStyles({
   root: {
     backgroundImage:
       'linear-gradient(320deg, rgba(2,0,36,1) 0%, rgba(61,69,77,1) 100%)',
-    minHeight: '100%',
+    height: '100%',
+    minHeight: 980,
     minWidth: '100%',
     position: 'fixed',
     top: 0,
@@ -158,7 +159,7 @@ const useStyles = makeStyles({
   },
   errorWrapper: {
     position: 'absolute',
-    bottom: 25,
+    bottom: 100,
   },
   errorMsg: {
     fontFamily: 'Nunito Sans',
