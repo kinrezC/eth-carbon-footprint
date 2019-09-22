@@ -134,7 +134,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 65,
+    marginTop: 80,
   },
   title: {
     fontFamily: 'Nunito Sans',
@@ -157,8 +157,8 @@ const useStyles = makeStyles({
     marginTop: 25,
   },
   errorWrapper: {
-    marginTop: 20,
-    position: 'fixed',
+    position: 'absolute',
+    bottom: 25,
   },
   errorMsg: {
     fontFamily: 'Nunito Sans',
@@ -201,23 +201,23 @@ const useStyles = makeStyles({
   },
   githubIcon: {
     position: 'absolute',
-    bottom: 8,
-    left: 'calc(50% - 75px)',
+    top: 8,
+    left: 'calc(50% - 95px)',
   },
   twitterIcon: {
     position: 'absolute',
-    bottom: 8,
-    left: 'calc(50% - 25px)',
+    top: 8,
+    left: 'calc(50% - 45px)',
   },
   mediumIcon: {
     position: 'absolute',
-    bottom: 8,
-    left: 'calc(50% + 25px)',
+    top: 8,
+    left: 'calc(50% + 5px)',
   },
   terminalIcon: {
     position: 'absolute',
-    bottom: 8,
-    left: 'calc(50% + 75px)',
+    top: 8,
+    left: 'calc(50% + 55px)',
   },
   resetButton: {
     padding: 10,
