@@ -57,10 +57,12 @@ const useStyles = makeStyles({
   root: {
     backgroundImage:
       'linear-gradient(320deg, rgba(2,0,36,1) 0%, rgba(61,69,77,1) 100%)',
+    margin: 0,
+    position: 'absolute',
+    padding: 0,
     height: '100%',
     minHeight: 980,
     minWidth: '100%',
-    position: 'fixed',
     top: 0,
     left: 0,
   },
