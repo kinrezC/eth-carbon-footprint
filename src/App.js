@@ -176,7 +176,7 @@ const useStyles = makeStyles({
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    marginBottom: 34,
+    marginBottom: 33,
     marginTop: 25,
   },
   loader: {
@@ -234,7 +234,7 @@ const useStyles = makeStyles({
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    marginBottom: 39,
+    marginBottom: 38,
     marginTop: 35,
   },
 });
