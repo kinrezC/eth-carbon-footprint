@@ -281,7 +281,7 @@ const App = () => {
     axios({
       method: 'post',
       url:
-        'https://us-central1-terminal-prd.cloudfunctions.net/null_9b7f3fa69d7a-4a37-ac34-df0640660076',
+        'https://us-central1-terminal-prd.cloudfunctions.net/null_1812b22548cc-4d63-839c-bc50198a8e28',
       data: {
         'address': values.ethAddress,
         'lowerBound': values.lowerBound,
@@ -465,8 +465,8 @@ const App = () => {
                     initial={{ scale: 1.5 }}
                   >
                     <motion.svg
-                      width="100"
-                      height="100"
+                      width="15"
+                      height="15"
                       xmlns="http://www.w3.org/2000/svg"
                       variants={arrow}
                     >
